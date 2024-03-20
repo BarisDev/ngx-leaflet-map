@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FeatureGroup, Marker, divIcon, icon, latLng, tileLayer } from 'leaflet';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -53,7 +54,7 @@ export class AppComponent implements OnInit {
         };
         tileLayers['Google Uydu'].addTo(this.map);
 
-        this.http.get('http://localhost:3000/points').subscribe((data: any) => {
+        this.http.get(environment.api + '/points').subscribe((data: any) => {
             data.forEach((el: any) => {
                 let byMarker = new Marker(latLng(el.lat, el.lng), {
                     draggable: false,
